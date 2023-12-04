@@ -36,12 +36,17 @@ namespace Server
 				Host.CreateDefaultBuilder(args)
 					.ConfigureServices(services =>
 					{
+						services.Configure<HostOptions>(options => 
+						{
+							options.ServicesStartConcurrently = true;
+							options.ServicesStopConcurrently = true;
+						});
 						services.AddLogging(log => 
 						{
 							log.ClearProviders();
 							log.AddConfiguration(configuration);
 						});
-						//services.AddHostedService<>();
+						services.AddHostedService<>();
 					});
 	}
 }
