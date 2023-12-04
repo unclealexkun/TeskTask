@@ -1,52 +1,67 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog;
+using NLog.Extensions.Logging;
+using Server.Controller;
 
 namespace Server
 {
-	internal class Program
+	public class Program
 	{
+
+		#region Константы
+
+		/// <summary>
+		/// Порт сервера.
+		/// </summary>
+		private const int port = 5000;
+
+		/// <summary>
+		/// Адрес по которому будет доступен наш сервер.
+		/// </summary>
+		private readonly static Uri url = new Uri($"http://localhost:{port}/");
+
+		/// <summary>
+		/// Логгер.
+		/// </summary>
+		private static readonly Logger logger = LogManager.Setup().LoadConfigurationFromFile("nlog.config", optional: true).GetCurrentClassLogger();
+
+		#endregion
+
 		public static void Main(string[] args)
 		{
-			var logger = LogManager.GetCurrentClassLogger();
-
+			logger.Debug("Init main");
 			try
 			{
-				var configuration = new ConfigurationBuilder()
-				 .SetBasePath(Directory.GetCurrentDirectory())
-				 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-				 .Build();
+				var config = new ConfigurationBuilder()
+					 .SetBasePath(Directory.GetCurrentDirectory())
+					 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+					 .Build();
 
-				CreateHostBuilder(args, configuration).Build().RunAsync();
+				var host = new WebHostBuilder()
+								.UseKestrel()
+								.UseUrls(url.ToString())
+								.UseStartup<Startup>()
+								.ConfigureLogging(loggingBuilder =>
+								{
+									loggingBuilder.ClearProviders();
+									loggingBuilder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+									loggingBuilder.AddNLog(config);
+								})
+								.Build();
+				host.Run();
 			}
-			catch (Exception ex) 
+			catch (Exception ex)
 			{
 				logger.Error(ex, "Stopped program because of exception");
 				throw;
 			}
-			finally 
+			finally
 			{
 				LogManager.Shutdown();
 			}
 		}
-
-		public static IHostBuilder CreateHostBuilder(string[] args, IConfigurationRoot configuration) =>
-				Host.CreateDefaultBuilder(args)
-					.ConfigureServices(services =>
-					{
-						services.Configure<HostOptions>(options => 
-						{
-							options.ServicesStartConcurrently = true;
-							options.ServicesStopConcurrently = true;
-						});
-						services.AddLogging(log => 
-						{
-							log.ClearProviders();
-							log.AddConfiguration(configuration);
-						});
-						services.AddHostedService<>();
-					});
 	}
 }
