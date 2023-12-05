@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Server.Cash;
 
 namespace Server
 {
@@ -8,6 +9,7 @@ namespace Server
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
+			services.AddSingleton<IBookCash, BookCash>();
 		}
 
 		public void Configure(IApplicationBuilder app)
