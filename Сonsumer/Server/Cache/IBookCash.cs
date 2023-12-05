@@ -1,11 +1,11 @@
 ﻿using Server.Model;
 
-namespace Server.Cash
+namespace Server.Cache
 {
 	/// <summary>
 	/// Интерфейс для кеша.
 	/// </summary>
-	public interface IBookCash
+	public interface IBookCache
 	{
 		/// <summary>
 		/// Добавить объект в кеш.

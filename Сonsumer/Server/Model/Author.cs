@@ -1,4 +1,6 @@
-﻿namespace Server.Model
+﻿using Newtonsoft.Json;
+
+namespace Server.Model
 {
 	/// <summary>
 	/// Автор.
@@ -8,11 +10,13 @@
 		/// <summary>
 		/// Фамилия и Имя.
 		/// </summary>
+		[JsonProperty("name")]
 		public string Name { get; set; }
 
 		/// <summary>
 		/// Язык.
 		/// </summary>
+		[JsonProperty("lang")]
 		public string Language { get; set; }
 	}
 }
