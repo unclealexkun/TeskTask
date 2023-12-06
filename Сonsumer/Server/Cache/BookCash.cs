@@ -13,18 +13,18 @@ namespace Server.Cache
 		/// <summary>
 		/// Кеш книг.
 		/// </summary>
-		private ConcurrentDictionary<Guid, Book> cache = new ConcurrentDictionary<Guid, Book>();
+		private ConcurrentDictionary<string, Book> cache;
 
 		#endregion
 
 		#region IBookCache
 
-		public bool Add(Guid key, Book value)
+		public bool Add(string key, Book value)
 		{
 			return this.cache.TryAdd(key, value);
 		}
 
-		public bool AddOrUpdate(Guid key, Book value)
+		public bool AddOrUpdate(string key, Book value)
 		{
 			if (this.cache.ContainsKey(key))
 			{
@@ -38,7 +38,7 @@ namespace Server.Cache
 			this.cache.Clear();
 		}
 
-		public Book Get(Guid key)
+		public Book Get(string key)
 		{
 			if (this.cache.ContainsKey(key))
 			{
@@ -52,7 +52,7 @@ namespace Server.Cache
 			return this.cache.Select(c => c.Value);
 		}
 
-		public bool Remove(Guid key)
+		public bool Remove(string key)
 		{
 			return this.cache.TryRemove(key, out Book value);
 		}
@@ -64,7 +64,10 @@ namespace Server.Cache
 		/// <summary>
 		/// Конструктор.
 		/// </summary>
-		private BookCache() { }
+		public BookCache() 
+		{
+			this.cache = new ConcurrentDictionary<string, Book>();
+		}
 
 		#endregion
 	}

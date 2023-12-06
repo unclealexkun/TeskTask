@@ -11,7 +11,7 @@ namespace Server.Model
 		/// Идентификатор.
 		/// </summary>
 		[JsonProperty("id")]
-		public Guid Id { get; set; }
+		public string Id { get; set; }
 
 		/// <summary>
 		/// Заголовок.
