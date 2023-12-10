@@ -1,0 +1,18 @@
+.navigation-bar {
+  background-color: #3cba54;
+  border: 2px solid rgb(15, 15, 15);
+}
+
+.navigation-bar__list_header {
+  padding-left: 25px;
+}
+
+.navigation-bar__list {
+  padding-top: 10px;
+  padding-left: 35px;
+}
+
+.navigation-bar__list_element {
+  padding-bottom: 10px;
+  display: block;
+}

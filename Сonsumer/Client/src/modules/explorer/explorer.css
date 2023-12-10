@@ -1,0 +1,31 @@
+.explorer {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  border: 2px solid rgb(15, 15, 15);
+  height: calc(100vh - 40px);
+}
+
+.explorer__header {
+  flex: 0 0 122px;
+  overflow: hidden;
+}
+
+.explorer__wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: row;
+  overflow: hidden;
+}
+
+.explorer__navigation-bar {
+  overflow: auto;
+  flex: 0 0 15%;
+  margin-right: 0;
+}
+
+.explorer__main-content {
+  flex: 1 0 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

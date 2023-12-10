@@ -37,25 +37,32 @@ namespace Server.Controller
 			return new JsonResult(this.cache.GetAll());
 		}
 
-		[HttpGet("{name}")]
-		public IActionResult GetBookByName(string name)
+		[HttpGet]
+		public IActionResult GetBooksByName([FromQuery]string name)
 		{
 			logger.LogTrace($"Get book by name: {name}");
 			return new JsonResult(this.cache.GetAll().FirstOrDefault(c => c.Title.Contains(name)));
 		}
 
-		[HttpGet("{author}")]
-		public IActionResult GetBookByAuthor(string author)
+		[HttpGet]
+		public IActionResult GetBooksByAuthor([FromQuery]string author)
 		{
 			logger.LogTrace($"Get book by author: {author}");
 			return new JsonResult(this.cache.GetAll().Where(c => c.Authors.Any(a => a.Name.Contains(author))));
 		}
 
-		[HttpGet("{category}")]
-		public IActionResult GetBookByCategory(string category)
+		[HttpGet]
+		public IActionResult GetBooksByCategory([FromQuery]string category)
 		{
 			logger.LogTrace($"Get books by category: {category}");
 			return new JsonResult(this.cache.GetAll().Where(c => c.Сategory.Contains(category)));
+		}
+
+		[HttpGet]
+		public IActionResult GetBookCategories()
+		{
+			logger.LogTrace($"Get book categories");
+			return new JsonResult(this.cache.GetAll().Select(c => c.Сategory));
 		}
 
 		#region Конструктор
@@ -64,6 +71,7 @@ namespace Server.Controller
 		/// Конструктор.
 		/// </summary>
 		/// <param name="logger">Логгер.</param>
+		/// <param name="cache">Кеш.</param>
 		public BookController(ILogger<BookController> logger, IBookCache cache)
 		{
 			this.logger = logger;

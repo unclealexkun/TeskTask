@@ -1,0 +1,19 @@
+.header {
+  background-color: #556680;
+  height: 120px;
+  border: 2px solid rgb(15, 15, 15);
+}
+
+.header__logo {
+  display: inline-block;
+  height: 80px;
+  width: auto;
+  padding-top: 19px;
+  padding-left: 19px;
+}
+
+.header__link {
+  float: right;
+  padding-top: 45px;
+  padding-right: 75px;
+}

@@ -14,7 +14,7 @@ namespace Server.Model
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Язык.
+		/// Язык, на котором пишет автор.
 		/// </summary>
 		[JsonProperty("lang")]
 		public string Language { get; set; }

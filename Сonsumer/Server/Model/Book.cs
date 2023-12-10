@@ -38,7 +38,7 @@ namespace Server.Model
 		public int PublicationDate { get; set; }
 
 		/// <summary>
-		/// Язык.
+		/// Язык, на котором написана книга.
 		/// </summary>
 		[JsonProperty("lang")]
 		public string Language { get; set; }

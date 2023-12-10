@@ -1,0 +1,22 @@
+.book-card {
+  padding: 15px;
+}
+
+.book-card__description {
+  font-size: medium;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 320px;
+  height: 25px;
+}
+
+.book-card__img {
+  height: 320px;
+  width: auto;
+}
+
+.book-card__button {
+  width: 320px;
+  height: 35px;
+}

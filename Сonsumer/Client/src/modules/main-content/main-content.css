@@ -1,0 +1,20 @@
+.main-content {
+  background-color: #f4c20d;
+  border: 2px solid rgb(15, 15, 15);
+}
+
+.main-content__header {
+  padding-left: 30px;
+}
+
+.main-content__img {
+  height: 625px;
+  width: auto;
+}
+
+.main-content__books {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 35px;
+}

@@ -1,0 +1,11 @@
+html {
+  font-family: 'Comic Sans MS';
+  font-size: 20px;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  border: 2px black;
+  overflow: hidden;
+}

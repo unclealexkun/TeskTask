@@ -396,3 +396,15 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+[dD]ebug
+[rR]elease
+[cC]heckin
+[bB]in
+obj
+log
+.idea
+.vs
+node_modules
+
+npm-debug.log*
