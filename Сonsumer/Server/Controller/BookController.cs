@@ -62,7 +62,7 @@ namespace Server.Controller
 		public IActionResult GetBookCategories()
 		{
 			logger.LogTrace($"Get book categories");
-			return new JsonResult(this.cache.GetAll().Select(c => c.Сategory));
+			return new JsonResult(this.cache.GetAll().Select(c => c.Сategory).Distinct().Order());
 		}
 
 		#region Конструктор
