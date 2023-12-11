@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import { IBook } from '../../types/book';
-import { addBasketBook, removeBasketBook, getBasketBooks, getBooksByCategory } from '../../api';
+import { addBasketBook, getBasketBooks, getBooksByCategory, removeBasketBook } from '../../api';
 import { BookCard } from '../book-card/book-card';
 
 require('modules/main-content/main-content.css');

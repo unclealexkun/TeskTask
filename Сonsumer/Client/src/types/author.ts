@@ -1,7 +1,7 @@
 /** Автор. */
 export interface IAuthor {
   /** Фамилия и имя. */
-  Name: string,
+  Name: string;
   /** Язык, на котором пишет автор. */
-  Language: string
+  Language: string;
 }

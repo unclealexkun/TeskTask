@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { IBook } from '../../types/book';
-import { removeBasketBook, getBasketBooks } from '../../api';
+import { getBasketBooks, removeBasketBook } from '../../api';
 import { BookCard } from '../book-card/book-card';
 
 require('../main-content/main-content.css');

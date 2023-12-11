@@ -9,7 +9,7 @@ export interface IBook {
   /** Раздел. */
   Category: string;
   /** Авторы. */
-  Authors: IAuthor[];
+  Authors: Array<IAuthor>;
   /** Дата публикации. */
   PublicationDate: number;
   /** Язык, на котором написана книга. */
