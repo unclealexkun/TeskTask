@@ -50,11 +50,10 @@ namespace Server.Controller
 		/// Конструктор.
 		/// </summary>
 		/// <param name="logger">Логгер.</param>
-		/// <param name="cache">Кеш.</param>
-		public BasketController(ILogger<BasketController> logger, IBookCache cache) 
+		public BasketController(ILogger<BasketController> logger) 
 		{
 			this.logger = logger;
-			this.cache = cache;
+			this.cache = new BookCache();
 		}
 
 		#endregion
