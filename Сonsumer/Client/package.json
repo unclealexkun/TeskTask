@@ -4,14 +4,14 @@
   "description": "Web app template",
   "main": "index.tsx",
   "scripts": {
-    "start": "node_modules/.bin/webpack --mode development --debug --watch --progress --profile",
-    "start-map": "node_modules/.bin/webpack --mode development --debug --devtool source-map --watch --progress --profile",
-    "build": "node_modules/.bin/webpack --mode development --debug --progress --profile",
-    "build-map": "node_modules/.bin/webpack --mode development --debug --devtool source-map --progress --profile",
-    "stylelint": "node_modules/.bin/stylelint \"src/**/*.css\"",
-    "stylelint-fix": "node_modules/.bin/stylelint \"src/**/*.css\" --fix",
-    "tslint": "node_modules/.bin/tslint --project tsconfig.json --config tslint.json",
-    "tslint-fix": "node_modules/.bin/tslint --project tsconfig.json --config tslint.json --fix",
+    "start": "webpack --mode development --debug --watch --progress --profile",
+    "start-map": "webpack --mode development --debug --devtool source-map --watch --progress --profile",
+    "build": "webpack --mode development --debug --progress --profile",
+    "build-map": "webpack --mode development --debug --devtool source-map --progress --profile",
+    "stylelint": "stylelint \"src/**/*.css\"",
+    "stylelint-fix": "stylelint \"src/**/*.css\" --fix",
+    "tslint": "tslint --project tsconfig.json --config tslint.json",
+    "tslint-fix": "tslint --project tsconfig.json --config tslint.json --fix",
     "flow": "flow"
   },
   "author": "",
@@ -81,5 +81,8 @@
     "tslint-react": "^4.0.0",
     "typescript": "^3.3.4000",
     "whatwg-fetch": "2.0.3"
+  },
+  "bin": {
+    "webapp": "bin/app.js"
   }
 }

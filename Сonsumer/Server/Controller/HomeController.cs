@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Server.Service;
 
 namespace Server.Controller
 {
 	[ApiController]
-	[Route("api")]
+	[Route("api/[action]")]
 	public class HomeController : ControllerBase
 	{
 		#region Поля и свойства
@@ -18,7 +19,36 @@ namespace Server.Controller
 
 		#region Методы
 
+		/// <summary>
+		/// Состояние сервера.
+		/// </summary>
+		/// <returns></returns>
+		[HttpGet]
+		public IActionResult Health()
+		{
+			logger.LogTrace($"Check health.");
+			return Ok();
+		}
 
+		/// <summary>
+		/// Получить версию билда.
+		/// </summary>
+		/// <returns>Версия билда.</returns>
+		public IActionResult Version()
+		{
+			logger.LogTrace($"Get version.");
+			return new JsonResult(ServerInfo.GetInstance.GetVersion());
+		}
+
+		/// <summary>
+		/// Метрики сервера.
+		/// </summary>
+		/// <returns>Нагрузка CPU и RAM.</returns>
+		public IActionResult Metrics()
+		{
+			logger.LogTrace($"Get metrics.");
+			return new JsonResult(ServerInfo.GetInstance.GetCurrentCpuUsage() + ServerInfo.GetInstance.GetAvailableRam());
+		}
 
 		#endregion
 

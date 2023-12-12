@@ -2,7 +2,7 @@ import { IBook } from './types/book';
 
 /** Получаем список категорий. */
 export async function getBookCategories(): Promise<Array<string>> {
-  const api = 'http://localhost:5000/api/book/getbookcategories';
+  const api = 'http://localhost:5000/api/categories';
   const options = {
     headers: { 'Content-Type': 'application/json' },
     method: 'GET'
@@ -16,7 +16,7 @@ export async function getBookCategories(): Promise<Array<string>> {
 
 /** Получить книги по категории.  */
 export async function getBooksByCategory(category: string): Promise<Array<IBook>> {
-  const api = 'http://localhost:5000/api/book/getbooksbycategory/?category=' + category;
+  const api = 'http://localhost:5000/api/book/categories/' + category;
   const options = {
     headers: { 'Content-Type': 'application/json' },
     method: 'GET'
@@ -30,7 +30,7 @@ export async function getBooksByCategory(category: string): Promise<Array<IBook>
 
 /** Получить книгу из корзины. */
 export async function getBasketBooks(): Promise<Array<IBook>> {
-  const api = 'http://localhost:5000/api/basket/getbasketbooks';
+  const api = 'http://localhost:5000/api/basket/';
   const options = {
     headers: { 'Content-Type': 'application/json' },
     method: 'GET'
@@ -44,7 +44,7 @@ export async function getBasketBooks(): Promise<Array<IBook>> {
 
 /** Добавить книгу в корзину. */
 export async function addBasketBook(book: IBook): Promise<boolean> {
-  const api = 'http://localhost:5000/api/basket/addbasketbook';
+  const api = 'http://localhost:5000/api/basket/';
   const options = {
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
@@ -59,7 +59,7 @@ export async function addBasketBook(book: IBook): Promise<boolean> {
 
 /** Удалить книгу из корзины. */
 export async function removeBasketBook(bookId: string): Promise<boolean> {
-  const api = 'http://localhost:5000/api/basket/removeBasketBook/?bookId=' + bookId;
+  const api = 'http://localhost:5000/api/basket/' + bookId;
   const options = {
     headers: { 'Content-Type': 'application/json' },
     method: 'DELETE'

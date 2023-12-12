@@ -1,6 +1,5 @@
-﻿using System.Net.Mime;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc.Formatters;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.DependencyInjection;
 using Server.Cache;
 
@@ -10,7 +9,12 @@ namespace Server
 	{
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddControllers();
+			services.AddControllers(options =>
+			{
+				options.Conventions.Add(
+						new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
+			})
+			.AddNewtonsoftJson();
 			services.AddSingleton<IBookCache, BookCache>();
 		}
 

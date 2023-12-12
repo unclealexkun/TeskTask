@@ -17,9 +17,9 @@ namespace Server.Controller
 		private readonly ILogger logger;
 
 		/// <summary>
-		/// Кеш книг.
+		/// Корзина с книгами.
 		/// </summary>
-		private readonly IBookCache cache;
+		private readonly IBookCache basket;
 
 		#endregion
 
@@ -33,7 +33,7 @@ namespace Server.Controller
 		public IActionResult GetBasketBooks()
 		{
 			logger.LogTrace($"Get all book from basket");
-			return new JsonResult(this.cache.GetAll());
+			return new JsonResult(this.basket.GetAll());
 		}
 
 		/// <summary>
@@ -42,11 +42,12 @@ namespace Server.Controller
 		/// <param name="book">Выбранная книга.</param>
 		/// <returns>True - если успешно добавлена или обновлёна книга, иначе False.</returns>
 		[HttpPost]
-		public IActionResult AddBasketBook(Book book)
+		public IActionResult AddBasketBook([FromBody]Book book)
 		{
+			logger.LogTrace($"Put book in basket");
 			if (book == null)
 				return new JsonResult(false);
-			return new JsonResult(this.cache.AddOrUpdate(book.Id, book));
+			return new JsonResult(this.basket.AddOrUpdate(book.Id, book));
 		}
 
 		/// <summary>
@@ -54,10 +55,11 @@ namespace Server.Controller
 		/// </summary>
 		/// <param name="bookId">Идентификатор книги.</param>
 		/// <returns>True - если успешно удалась книга, иначе False.</returns>
-		[HttpDelete]
-		public IActionResult RemoveBasketBook([FromQuery] string bookId)
+		[HttpDelete("{bookId}")]
+		public IActionResult RemoveBasketBook(string bookId)
 		{
-			return new JsonResult(this.cache.Remove(bookId));
+			logger.LogTrace($"Remove book in basket");
+			return new JsonResult(this.basket.Remove(bookId));
 		}
 
 		#endregion
@@ -71,7 +73,7 @@ namespace Server.Controller
 		public BasketController(ILogger<BasketController> logger) 
 		{
 			this.logger = logger;
-			this.cache = new BookCache();
+			this.basket = new BookCache();
 		}
 
 		#endregion
