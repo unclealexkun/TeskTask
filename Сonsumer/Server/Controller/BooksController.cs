@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Server.Cache;
 using Server.Service;
 
 namespace Server.Controller
 {
+	[ApiVersion(1.0)]
 	[ApiController]
-	[Route("api/[controller]")]
+	[Route("api/v{version:apiVersion}/[controller]")]
 	public class BooksController : ControllerBase
 	{
 		#region Поля и свойства

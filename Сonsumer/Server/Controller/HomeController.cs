@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Server.Service;
 
 namespace Server.Controller
 {
+	[ApiVersion(1.0)]
 	[ApiController]
-	[Route("api/[action]")]
+	[Route("api/v{version:apiVersion}/[action]")]
 	public class HomeController : ControllerBase
 	{
 		#region Поля и свойства

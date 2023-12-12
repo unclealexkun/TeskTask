@@ -15,6 +15,7 @@ namespace Server
 						new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
 			})
 			.AddNewtonsoftJson();
+			services.AddApiVersioning();
 			services.AddSingleton<IBookCache, BookCache>();
 		}
 
