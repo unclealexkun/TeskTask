@@ -41,35 +41,54 @@ namespace Server.Service
 
 		#region IBookStore
 
-		public IEnumerable<string> GetBookCategories()
+		public IEnumerable<string> GetBookCategories(PagedListParameters pagedListParameters)
 		{
 			return this.cache.GetAll()
 				.Select(book => book.Сategory)
 				.Distinct()
-				.Order();
+				.Order()
+				.Skip((pagedListParameters.PageNumber - 1) * pagedListParameters.PageSize)
+				.Take(pagedListParameters.PageSize)
+				.ToList(); ;
 		}
 
-		public IEnumerable<Book> GetAllBooks()
-		{
-			return this.cache.GetAll();
-		}
-
-		public IEnumerable<Book> GetBooksByTitle(string title)
+		public IEnumerable<Book> GetAllBooks(PagedListParameters pagedListParameters)
 		{
 			return this.cache.GetAll()
-				.Where(book => book.Title.Contains(title));
+				.OrderBy(book => book.Title)
+				.Skip((pagedListParameters.PageNumber - 1) * pagedListParameters.PageSize)
+				.Take(pagedListParameters.PageSize)
+				.ToList();
 		}
 
-		public IEnumerable<Book> GetBooksByAuthor(string author)
+		public IEnumerable<Book> GetBooksByTitle(string title, PagedListParameters pagedListParameters)
 		{
 			return this.cache.GetAll()
-				.Where(book => book.Authors.Any(authorBook => authorBook.Name.Contains(author)));
+				.Where(book => book.Title.Contains(title))
+				.OrderBy(book => book.Title)
+				.Skip((pagedListParameters.PageNumber - 1) * pagedListParameters.PageSize)
+				.Take(pagedListParameters.PageSize)
+				.ToList();
 		}
 
-		public IEnumerable<Book> GetBooksByCategory(string category)
+		public IEnumerable<Book> GetBooksByAuthor(string author, PagedListParameters pagedListParameters)
 		{
 			return this.cache.GetAll()
-				.Where(book => book.Сategory.Contains(category));
+				.Where(book => book.Authors.Any(authorBook => authorBook.Name.Contains(author)))
+				.OrderBy(book => book.Title)
+				.Skip((pagedListParameters.PageNumber - 1) * pagedListParameters.PageSize)
+				.Take(pagedListParameters.PageSize)
+				.ToList();
+		}
+
+		public IEnumerable<Book> GetBooksByCategory(string category, PagedListParameters pagedListParameters)
+		{
+			return this.cache.GetAll()
+				.Where(book => book.Сategory.Contains(category))
+				.OrderBy(book => book.Title)
+				.Skip((pagedListParameters.PageNumber - 1) * pagedListParameters.PageSize)
+				.Take(pagedListParameters.PageSize)
+				.ToList();
 		}
 
 		#endregion
